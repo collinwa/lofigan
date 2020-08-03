@@ -8,3 +8,4 @@ You'll need to encode these files as sparse matrices before training. Use the `e
 
 `WaveNet.py` contains the actual model. 
 
+Note that this is only tested for python 3.7, and requires the latest versions of tensorflow, scipy, numpy, and scikit-learn. 
