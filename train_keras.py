@@ -41,8 +41,6 @@ if __name__ == '__main__':
             filter_dim=filter_dim,
             max_dilation=max_dilation,
             n_stacks=n_stacks)
-<<<<<<< HEAD
+    print(model.summary())
     print(pred_size)
-=======
->>>>>>> c49ab9d84f717a93a0008d62332d3e0a78212eab
 
