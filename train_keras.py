@@ -2,8 +2,8 @@ import random
 import os
 import scipy.sparse as sparse
 import tensorflow as tf 
-from tensorflow.keras.optimizers import Adam
-from WaveNetKerasFunctional import create_model
+from tensorflow import keras
+from WaveNetKerasFunctional import create_model, nll_loss
 
 # define hyperparameters
 seq_len = 132300  # 3 second long input
@@ -43,4 +43,6 @@ if __name__ == '__main__':
             n_stacks=n_stacks)
     model.summary()
     print(pred_size)
+    optimizer = keras.optimizers.Adam()
+    model.compile(loss=nll_loss, optimizer=optimizer, metrics=['categorical_accuracy'])
 

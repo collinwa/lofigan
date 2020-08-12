@@ -2,6 +2,22 @@
 import tensorflow as tf
 import tensorflow.keras as keras
 from tensorflow.keras.layers import Concatenate, Conv1D, Layer, Dense, Lambda, Multiply, Add, ReLU
+import tensorflow.keras.backend as kb
+
+def nll_loss(y_true, y_pred):
+    # softmax for y_pred
+    y_pred = kb.softmax(y_pred, axis=-1)
+    # elementwise product
+    loss = y_true * y_pred
+    # elementwise logarithm
+    loss = kb.log(loss)
+    # ll is sum of log probabilities
+    # sum across the channels and t dimension
+    loss = kb.sum(loss, axis=-1)
+    loss = kb.sum(loss, axis=-1)
+    # convert ll to nll
+    return -1 * loss
+
 
 def create_model(seq_len=44100, in_ch=256, causal_ch=512, stack_ch=64,
         scaled_ch=128, filter_dim=2, max_dilation=10, n_stacks=1):
