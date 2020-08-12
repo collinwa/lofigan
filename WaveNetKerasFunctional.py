@@ -17,7 +17,7 @@ def create_model(seq_len=44100, in_ch=256, causal_ch=512, stack_ch=64,
         return Lambda(trim_func)
 
     # we lose a total of 2^n values due to padding: 1 from the first convolution, then 1+2+...+2^n-1 = 2^n - 1 from the dilated conv; 2^max_dilation per stack of causal convs
-    pred_size = seq_len - pow(2, max_dilation) * n_stacks
+    pred_size = seq_len - 1 - (pow(2, max_dilation)-1) * n_stacks
 
     # create the input tensor; ignore batch dimension
     inputs = keras.Input(shape=(seq_len, in_ch))
